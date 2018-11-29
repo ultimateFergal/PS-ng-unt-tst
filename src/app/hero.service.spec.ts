@@ -1,7 +1,7 @@
-import { TestBed } from "@angular/core/testing";
-import { HeroService } from "./hero.service";
-import { MessageService } from "./message.service";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { TestBed } from '@angular/core/testing';
+import { HeroService } from './hero.service';
+import { MessageService } from './message.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('HeroService', () => {
     let mockMessageService;
@@ -20,11 +20,11 @@ describe('HeroService', () => {
                 HeroService,
                 { provide: MessageService, useValue: mockMessageService}
             ]
-        })
+        });
 
         httpTestingController = TestBed.get(HttpTestingController);
         service =  TestBed.get(HeroService); // get a handle to a service, geting an instance to a service module
-        let msgSvc =  TestBed.get(MessageService);
+        const msgSvc =  TestBed.get(MessageService);
     });
 
     describe('getHero', () => {
@@ -36,5 +36,5 @@ describe('HeroService', () => {
             req.flush({ id: 4, name: 'SuperDude', strength: 100 }); // Data we want to return when the previous call form req comes in
             httpTestingController.verify(); // Checks service requested is teh same as req
         });
-    })
+    });
 });
