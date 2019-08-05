@@ -1,16 +1,18 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { HeroesComponent } from "./heroes.component";
-import { NO_ERRORS_SCHEMA, Input, Output, Component, Directive } from "@angular/core";
-import { HeroService } from "../hero.service";
-import { of } from "rxjs/internal/observable/of";
-import { Hero } from "../hero";
-import { EventEmitter } from "protractor";
-import { By } from "@angular/platform-browser";
-import { HeroComponent } from "../hero/hero.component";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeroesComponent } from './heroes.component';
+import { NO_ERRORS_SCHEMA, Input, Output, Component, Directive } from '@angular/core';
+import { HeroService } from '../hero.service';
+import { of } from 'rxjs/internal/observable/of';
+import { Hero } from '../hero';
+import { EventEmitter } from 'protractor';
+import { By } from '@angular/platform-browser';
+import { HeroComponent } from '../hero/hero.component';
 
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: '[routerLink]',
+    // tslint:disable-next-line:use-host-property-decorator
     host: { '(click)': 'onClick()'}
 })
 export class RouterLinkDirectiveStub {
@@ -30,7 +32,7 @@ describe('HeroesComponent (deep tests)', () => {
 
     beforeEach(() => {
         HEROES =  [
-            {id:1, name: 'SpiderDude', strength: 8},
+            {id: 1, name: 'SpiderDude', strength: 8},
             {id:2, name: 'Wonderful Woman', strength: 24},
             {id:3, name: 'SuperDude', strength: 55},
         ];
@@ -47,7 +49,7 @@ describe('HeroesComponent (deep tests)', () => {
             // schemas: [NO_ERRORS_SCHEMA]
         })
 
-        fixture = TestBed.createComponent(HeroesComponent);      
+        fixture = TestBed.createComponent(HeroesComponent);
 
     });
 
@@ -60,20 +62,20 @@ describe('HeroesComponent (deep tests)', () => {
         // run ngOnInit
         fixture.detectChanges();
 
-        const heroComponentsDEs = fixture.debugElement.queryAll(By.directive(HeroComponent))
+        const heroComponentsDEs = fixture.debugElement.queryAll(By.directive(HeroComponent));
 
         expect(heroComponentsDEs.length).toEqual(3);
         expect(heroComponentsDEs[0].componentInstance.hero.name).toEqual('SpiderDude');
         expect(heroComponentsDEs[1].componentInstance.hero.name).toEqual('Wonderful Woman');
         expect(heroComponentsDEs[2].componentInstance.hero.name).toEqual('SuperDude');
 
-        for(let i = 0; i < heroComponentsDEs.length; i++){
+        for (let i = 0; i < heroComponentsDEs.length; i++) {
             // expect(heroComponentsDEs[i].componentInstance.hero.name).toEqual(HEROES[i].name);
             expect(heroComponentsDEs[i].componentInstance.hero).toEqual(HEROES[i]);
         }
-    })
+    });
 
-    it(`should call heroService.deleteHero when the Hero Component's delete button is clicked`, () => {
+    it('should call heroService.deleteHero when the Hero Component\'s delete button is clicked', () => {
         spyOn(fixture.componentInstance, 'delete');
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
@@ -94,7 +96,7 @@ describe('HeroesComponent (deep tests)', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
         fixture.detectChanges();
-        const name = "Mr. Ice";
+        const name = 'Mr. Ice';
         mockHeroService.addHero.and.returnValue(of({id: 5, name: name, strength: 4}));
         const inputElement =  fixture.debugElement.query(By.css('input')).nativeElement;
         const addButton = fixture.debugElement.queryAll(By.css('button'))[0];
@@ -129,7 +131,7 @@ describe('HeroesComponent (deep tests)', () => {
 
 /// Dummy module to satisfy Angular Language service. Never used.
 import { NgModule } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
