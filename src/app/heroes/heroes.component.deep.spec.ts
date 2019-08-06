@@ -25,7 +25,7 @@ export class RouterLinkDirectiveStub {
 }
 
 describe('HeroesComponent (deep tests)', () => {
-    let fixture: ComponentFixture<HeroesComponent>; 
+    let fixture: ComponentFixture<HeroesComponent>;
     let mockHeroService;
     let HEROES;
 
@@ -33,8 +33,8 @@ describe('HeroesComponent (deep tests)', () => {
     beforeEach(() => {
         HEROES =  [
             {id: 1, name: 'SpiderDude', strength: 8},
-            {id:2, name: 'Wonderful Woman', strength: 24},
-            {id:3, name: 'SuperDude', strength: 55},
+            {id: 2, name: 'Wonderful Woman', strength: 24},
+            {id: 3, name: 'SuperDude', strength: 55},
         ];
         mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero']);
         TestBed.configureTestingModule({
@@ -47,7 +47,7 @@ describe('HeroesComponent (deep tests)', () => {
                { provide: HeroService, useValue: mockHeroService }
             ],
             // schemas: [NO_ERRORS_SCHEMA]
-        })
+        });
 
         fixture = TestBed.createComponent(HeroesComponent);
 
@@ -55,7 +55,7 @@ describe('HeroesComponent (deep tests)', () => {
 
     it('should be true', () => {
         expect(true).toBe(true);
-    })
+    });
 
     it('should render each hero as a HeroComponent', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
@@ -86,7 +86,7 @@ describe('HeroesComponent (deep tests)', () => {
         heroComponents[0].triggerEventHandler('delete', null);
 
         heroComponents[0].query(By.css('button'))
-            .triggerEventHandler('click', {stopPropagation: () => { }})
+            .triggerEventHandler('click', {stopPropagation: () => { }});
 
         expect(fixture.componentInstance.delete).toHaveBeenCalledWith(HEROES[0]);
 
@@ -115,10 +115,10 @@ describe('HeroesComponent (deep tests)', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
         fixture.detectChanges();
-        
+
         const heroComponents = fixture.debugElement.queryAll(By.directive(HeroComponent));
 
-        let routerLink = heroComponents[0]
+        const routerLink = heroComponents[0]
             .query(By.directive(RouterLinkDirectiveStub))
             .injector.get(RouterLinkDirectiveStub);
 

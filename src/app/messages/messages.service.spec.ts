@@ -1,11 +1,11 @@
-import { MessageService } from "../message.service";
+import { MessageService } from '../message.service';
 
 describe('MessageService', () => {
-    let service: MessageService;
+    let service: MessageService; // Declaring as type MessageService
 
     beforeEach(() => {
         // Arrange
-        service = new MessageService();
+        service = new MessageService(); // Initializing the service as a Message Service with its methods and attributes
     });
 
     it('should have no messasges to start', () => {
