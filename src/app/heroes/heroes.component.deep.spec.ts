@@ -8,15 +8,18 @@ import { EventEmitter } from 'protractor';
 import { By } from '@angular/platform-browser';
 import { HeroComponent } from '../hero/hero.component';
 
-
+// Creation of fake routerlink directive ********************* //
 // The routerlink is a directive that lives inside the routermodule
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[routerLink]',
     // tslint:disable-next-line:use-host-property-decorator
-    host: { '(click)': 'onClick()'}
+    host: { '(click)': 'onClick()'} // so the directive Listens to the click event
+                                    // in the parent DOM node, and when it's fired call the onClick() method
 })
+// tslint:disable-next-line:directive-class-suffix
 export class RouterLinkDirectiveStub {
+    // tslint:disable-next-line:no-input-rename
     @Input('routerLink') linkParams: any;
     navigatedTo: any = null;
 
@@ -24,6 +27,7 @@ export class RouterLinkDirectiveStub {
         this.navigatedTo = this.linkParams;
     }
 }
+// *********************************************************** //
 
 describe('HeroesComponent (deep tests)', () => {
     let fixture: ComponentFixture<HeroesComponent>;
@@ -116,6 +120,7 @@ describe('HeroesComponent (deep tests)', () => {
         expect(heroText).toContain(name);
     });
 
+    // Testing that the HeroComponent is configured correctly, usage of the routerLink correctly
     it('should have the correct route for the first hero', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
@@ -124,10 +129,10 @@ describe('HeroesComponent (deep tests)', () => {
         const heroComponents = fixture.debugElement.queryAll(By.directive(HeroComponent));
 
         const routerLink = heroComponents[0]
-            .query(By.directive(RouterLinkDirectiveStub))
+            .query(By.directive(RouterLinkDirectiveStub)) // getting the routerlyink directive from the component
             .injector.get(RouterLinkDirectiveStub);
 
-        heroComponents[0].query(By.css('a')).triggerEventHandler('click', null);
+        heroComponents[0].query(By.css('a')).triggerEventHandler('click', null); // triggering de click event on the html a element
 
         expect(routerLink.navigatedTo).toBe('/detail/1');
     });

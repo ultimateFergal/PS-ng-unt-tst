@@ -56,6 +56,7 @@ describe('HeroDetailComponent', () => {
             }, 300);
         }) */
 
+        // fakeasync to treat the asynchronus code as synchronus code working with zone.js
         it('should call updateHero when save is called', fakeAsync(() => {
            mockHeroService.updateHero.and.returnValue(of({}));
            fixture.detectChanges();
@@ -70,13 +71,13 @@ describe('HeroDetailComponent', () => {
            expect(mockHeroService.updateHero).toHaveBeenCalled();
         }));
 
-/*     it('should call updateHero when save is called', async(() => {
+/*     it('should call updateHero when save is called', async(() => { // For working with promises, this doesnt deal well with set timeouts
         mockHeroService.updateHero.and.returnValue(of({}));
         fixture.detectChanges();
 
         fixture.componentInstance.save();
 
-        fixture.whenStable().then(() => {
+        fixture.whenStable().then(() => { // for wating until the pending promise is resolved
             expect(mockHeroService.updateHero).toHaveBeenCalled();
         });
     })) */

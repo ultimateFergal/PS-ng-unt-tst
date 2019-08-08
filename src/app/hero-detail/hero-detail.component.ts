@@ -33,8 +33,8 @@ export class HeroDetailComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void{
-    var p = new Promise((resolve) => {
+  save(): void {
+    const p = new Promise((resolve) => {
       this.heroService.updateHero(this.hero)
         .subscribe(() => this.goBack());
         resolve();
@@ -47,19 +47,20 @@ export class HeroDetailComponent implements OnInit {
     }, 250, false)(); // Invoked right there
   } */
 
-  // To make the code asynchronus
+  // To make the code asynchronus,
+  // This makes sure that another function doesnt get called too often
   debounce(func, wait, immediate) {
-    var timeout;
+    let timeout;
     return function () {
-      var context = this, args = arguments;
-      var later = function () {
+      const context = this, args = arguments;
+      const later = function () {
         timeout = null;
-        if (!immediate) func.apply(context, args);
+        if (!immediate) { func.apply(context, args); }
       };
-      var callNow = immediate && !timeout;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
       timeout =  setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
+      if (callNow) { func.apply(context, args); }
     };
   }
 }
