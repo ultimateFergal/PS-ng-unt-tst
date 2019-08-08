@@ -9,6 +9,7 @@ import { By } from '@angular/platform-browser';
 import { HeroComponent } from '../hero/hero.component';
 
 
+// The routerlink is a directive that lives inside the routermodule
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[routerLink]',
@@ -51,6 +52,8 @@ describe('HeroesComponent (deep tests)', () => {
 
         fixture = TestBed.createComponent(HeroesComponent);
 
+        // fixture.detectChanges(); // Both Heroes component and child componente will get initialiazed
+
     });
 
     it('should be true', () => {
@@ -60,9 +63,10 @@ describe('HeroesComponent (deep tests)', () => {
     it('should render each hero as a HeroComponent', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
-        fixture.detectChanges();
+        fixture.detectChanges(); // Both Heroes component and child componente will get initialiazed
 
-        const heroComponentsDEs = fixture.debugElement.queryAll(By.directive(HeroComponent));
+        // heroComponentes Debug Elements
+        const heroComponentsDEs = fixture.debugElement.queryAll(By.directive(HeroComponent));  // using directives to find child components
 
         expect(heroComponentsDEs.length).toEqual(3);
         expect(heroComponentsDEs[0].componentInstance.hero.name).toEqual('SpiderDude');

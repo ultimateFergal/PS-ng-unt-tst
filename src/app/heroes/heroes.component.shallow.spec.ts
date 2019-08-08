@@ -12,14 +12,20 @@ describe('HeroesComponent (shallow tests)', () => {
     let mockHeroService;
     let HEROES;
 
+    // ***************************************** */
+    // Mock for child component
+    // ***************************************** */
     @Component({
         selector: 'app-hero',
         template: '<div></div>'
     })
+
     class FakeHeroComponent {
         @Input() hero: Hero;
         // @Output() delete = new EventEmitter();
     }
+    // ***************************************** */
+
     beforeEach(() => {
         HEROES =  [
             {id: 1, name: 'SpiderDude', strength: 8},
