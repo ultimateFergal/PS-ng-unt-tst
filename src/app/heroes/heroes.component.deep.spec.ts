@@ -80,19 +80,20 @@ describe('HeroesComponent (deep tests)', () => {
     });
 
     it('should call heroService.deleteHero when the Hero Component\'s delete button is clicked', () => {
-        spyOn(fixture.componentInstance, 'delete');
+        spyOn(fixture.componentInstance, 'deleteHero'); // to watch and see if the method is called
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         // run ngOnInit
         fixture.detectChanges();
 
         const  heroComponents = fixture.debugElement.queryAll(By.directive(HeroComponent));
-        // (<HeroComponent>heroComponents[0].componentInstance).delete.emit(undefined);
-        heroComponents[0].triggerEventHandler('delete', null);
+        // tslint:disable-next-line:max-line-length
+        // (<HeroComponent>heroComponents[0].componentInstance).delete.emit(undefined); // just making the child component emmiting or raise its event
+        heroComponents[0].triggerEventHandler('delete', null); // telling the debug element to just trigger de delete event
 
         heroComponents[0].query(By.css('button'))
-            .triggerEventHandler('click', {stopPropagation: () => { }});
+            .triggerEventHandler('click', {stopPropagation: () => { }}); // With dummy object for stopPropagation method
 
-        expect(fixture.componentInstance.delete).toHaveBeenCalledWith(HEROES[0]);
+        expect(fixture.componentInstance.deleteHero).toHaveBeenCalledWith(HEROES[0]);
 
     });
 
